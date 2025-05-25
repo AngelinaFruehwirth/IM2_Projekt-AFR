@@ -12,49 +12,6 @@ try{
 const params = new URLSearchParams(window.location.search);
 const name = params.get('name');
 
-if (name) {
-  document.getElementById('nameDisplay').textContent = `Based on the name: "${name}"`;
-
-  const url = `https://api.nationalize.io/?name=${name}`;
-
-  fetch(url)
-    .then(response => response.json())
-    .then(async data => {
-      const response = await fetch('countries.json');
-      const countryList = await response.json();
-
-      const resultContainer = document.getElementById("result");
-      resultContainer.innerHTML = "";
-
-      data.country.slice(0, 3).forEach((country) => {
-        const match = countryList.find(c => c.code === country.country_id);
-        const div = document.createElement("div");
-        div.className = "bar";
-        div.style.height = `${100 + country.probability * 200}px`;
-
-        const flag = document.createElement("img");
-        flag.className = "bar-flag";
-        flag.src = match?.flag || "";
-        flag.alt = match?.name || country.country_id;
-
-        const label = document.createElement("div");
-        label.className = "bar-label";
-        label.innerHTML = `
-          ${Math.round(country.probability * 100)}%<br>
-          ${match?.name || country.country_id}
-        `;
-
-        div.appendChild(flag);
-        div.appendChild(label);
-        resultContainer.appendChild(div);
-      });
-    })
-    .catch(err => {
-      console.error("Error fetching data:", err);
-    });
-}
-
-//neu
 
 async function getResults() {
   const params = new URLSearchParams(window.location.search);
@@ -72,28 +29,36 @@ async function getResults() {
     data.country
       .sort((a, b) => b.probability - a.probability)
       .slice(0, 3)
-      .forEach((item) => {
+      .forEach((item, index) => {
         const match = countries.find((c) => c.code === item.country_id);
         const percent = Math.round(item.probability * 100);
 
-        const result = document.createElement("div");
-        result.className = "result-item";
+        const podium = document.createElement("div");
+        podium.className = `podium podium-${index + 1}`;
 
-        result.innerHTML = `
-          <div class="flag">${match?.emoji || ""}</div>
-          <div class="bar" style="height:${100 + percent}px">
-            <div>${percent}%</div>
-            <div>${match?.name || item.country_id}</div>
-          </div>
-        `;
-        resultContainer.appendChild(result);
+        const flagImg = document.createElement("img");
+        flagImg.src = match?.flag || "";
+        flagImg.alt = match?.name || item.country_id;
+        flagImg.className = "flag-img";
+
+        const column = document.createElement("div");
+        column.className = "column";
+        column.style.height = `${100 + percent}px`;
+
+        const label = document.createElement("div");
+        label.className = "label";
+        label.innerHTML = `${percent}%<br>${match?.name || item.country_id}`;
+
+        podium.appendChild(flagImg);
+        podium.appendChild(column);
+        podium.appendChild(label);
+
+        resultContainer.appendChild(podium);
       });
   } catch (e) {
     console.error("Fehler beim Abrufen der Daten", e);
   }
 }
-
-window.addEventListener("DOMContentLoaded", getResults);
 
 fetch('countries.json')
   .then((res) => res.json())
@@ -115,3 +80,5 @@ fetch('countries.json')
       container.appendChild(img);
     });
   });
+
+  getResults();
