@@ -1,30 +1,23 @@
-console.log('test')
 
-const url = 'https://api.nationalize.io/?name=bock';
-try{
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
-}catch(e) {
-    console.error(e);
-}
-
+// 🔍 Name aus URL holen
 const params = new URLSearchParams(window.location.search);
-const name = params.get('name');
+const name = params.get("name");
 
-
+// ✅ Hauptfunktion zum Abrufen und Anzeigen der Ergebnisse
 async function getResults() {
-  const params = new URLSearchParams(window.location.search);
-  const name = params.get("name");
   if (!name) return;
 
   try {
     const response = await fetch(`https://api.nationalize.io/?name=${name}`);
     const data = await response.json();
+
     const countries = await fetch("countries.json").then((res) => res.json());
 
     const resultContainer = document.getElementById("results-container");
     resultContainer.innerHTML = "";
+
+  const loading = document.getElementById("loading");
+if (loading) loading.style.display = "none";
 
     data.country
       .sort((a, b) => b.probability - a.probability)
@@ -60,6 +53,7 @@ async function getResults() {
   }
 }
 
+// 🌍 Emojis im Hintergrund erzeugen
 fetch('countries.json')
   .then((res) => res.json())
   .then((countries) => {
@@ -74,11 +68,12 @@ fetch('countries.json')
 
       img.style.top = `${Math.random() * 90}%`;
       img.style.left = `${Math.random() * 90}%`;
-      img.style.animationDuration = `${20 + Math.random() * 20}s`; // z. B. 20–40 Sekunden
-      img.style.animationDelay = `${Math.random() * 10}s`; // z. B. 0–10 Sekunden
+      img.style.animationDuration = `${20 + Math.random() * 20}s`;
+      img.style.animationDelay = `${Math.random() * 10}s`;
 
       container.appendChild(img);
     });
   });
 
-  getResults();
+// 🚀 Funktion ausführen, sobald Seite geladen
+getResults();
