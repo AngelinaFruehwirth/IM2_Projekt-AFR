@@ -2,7 +2,9 @@
 
 *.mp4
 *.mov
-
+.DS_Store
+config.php
+.vscode
 
 
 # Prerequisites
