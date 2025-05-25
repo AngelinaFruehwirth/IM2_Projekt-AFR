@@ -94,3 +94,24 @@ async function getResults() {
 }
 
 window.addEventListener("DOMContentLoaded", getResults);
+
+fetch('countries.json')
+  .then((res) => res.json())
+  .then((countries) => {
+    const container = document.getElementById('emoji-container');
+    const shuffled = countries.sort(() => 0.5 - Math.random()).slice(0, 20);
+
+    shuffled.forEach((country) => {
+      const img = document.createElement('img');
+      img.className = 'floating-emoji';
+      img.src = country.image;
+      img.alt = country.code;
+
+      img.style.top = `${Math.random() * 90}%`;
+      img.style.left = `${Math.random() * 90}%`;
+      img.style.animationDuration = `${20 + Math.random() * 20}s`; // z. B. 20–40 Sekunden
+      img.style.animationDelay = `${Math.random() * 10}s`; // z. B. 0–10 Sekunden
+
+      container.appendChild(img);
+    });
+  });

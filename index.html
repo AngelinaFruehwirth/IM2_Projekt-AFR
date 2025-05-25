@@ -29,19 +29,21 @@
 
     // Floating Emojis
     fetch('countries.json')
-      .then((res) => res.json())
-      .then((countries) => {
-        const container = document.getElementById('emoji-container');
-        const shuffled = countries.sort(() => 0.5 - Math.random()).slice(0, 20);
-        shuffled.forEach((country) => {
-          const span = document.createElement('span');
-          span.className = 'floating-emoji';
-          span.textContent = country.emoji;
-          span.style.top = `${Math.random() * 90}%`;
-          span.style.left = `${Math.random() * 90}%`;
-          container.appendChild(span);
-        });
-      });
+  .then((res) => res.json())
+  .then((countries) => {
+    const container = document.getElementById('emoji-container');
+    const shuffled = countries.sort(() => 0.5 - Math.random()).slice(0, 20);
+
+    shuffled.forEach((country) => {
+      const img = document.createElement('img');
+      img.className = 'floating-emoji';
+      img.src = country.image;
+      img.alt = country.code;
+      img.style.top = `${Math.random() * 90}%`;
+      img.style.left = `${Math.random() * 90}%`;
+      container.appendChild(img);
+    });
+  });
 
   </script>
 
