@@ -195,3 +195,21 @@ body {
 .podium-3 .column {
   background: linear-gradient(#dcdcdc, #999);
 }
+
+.results-page {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Zentriert vertikal */
+  align-items: center;
+  padding-top: 0; /* Entfernt altes Padding */
+}
+
+.results {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-top: 2rem;
+}
