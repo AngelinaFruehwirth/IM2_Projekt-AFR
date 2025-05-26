@@ -18,7 +18,7 @@
     </form>
   </div>
   <script>
-    // Redirect with query
+    
     document.getElementById('search-form').addEventListener('submit', function (e) {
       e.preventDefault();
       const name = document.getElementById('name-input').value.trim();
@@ -27,7 +27,7 @@
       }
     });
 
-    // Floating Emojis
+    // Schwirrende Emojis
     fetch('countries.json')
   .then((res) => res.json())
   .then((countries) => {

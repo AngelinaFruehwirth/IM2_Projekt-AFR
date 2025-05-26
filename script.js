@@ -1,9 +1,9 @@
 
-// 🔍 Name aus URL holen
+// Name aus URL holen
 const params = new URLSearchParams(window.location.search);
 const name = params.get("name");
 
-// ✅ Hauptfunktion zum Abrufen und Anzeigen der Ergebnisse
+// Hauptfunktion zum Abrufen und Anzeigen der Ergebnisse
 async function getResults() {
   if (!name) return;
 
@@ -54,7 +54,7 @@ if (nameDisplay) nameDisplay.textContent = "Your Results";
   }
 }
 
-// 🌍 Emojis im Hintergrund erzeugen
+// Emojis für Resultate anzeigen lassen
 fetch('countries.json')
   .then((res) => res.json())
   .then((countries) => {
@@ -76,5 +76,5 @@ fetch('countries.json')
     });
   });
 
-// 🚀 Funktion ausführen, sobald Seite geladen
+// Funktion ausführen, sobald Seite geladen
 getResults();
