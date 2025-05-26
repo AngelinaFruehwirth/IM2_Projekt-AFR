@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>Where are you from</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Where are you from</title>
 </head>
 
 <body class="landing-page">
   <div class="emoji-container" id="emoji-container"></div>
+
   <div class="search-box">
     <h1>Where are you from?</h1>
     <p>Find your origin</p>
@@ -17,37 +18,10 @@
       <input type="text" id="name-input" placeholder="Search" required />
       <button type="submit">🔍</button>
     </form>
+    <p id="error-msg" style="color: red; margin-top: 0.5rem;"></p>
   </div>
-  <script>
-    
-    document.getElementById('search-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const name = document.getElementById('name-input').value.trim();
-      if (name) {
-        window.location.href = `results.html?name=${encodeURIComponent(name)}`;
-      }
-    });
 
-    // Schwirrende Emojis
-    fetch('countries.json')
-  .then((res) => res.json())
-  .then((countries) => {
-    const container = document.getElementById('emoji-container');
-    const shuffled = countries.sort(() => 0.5 - Math.random()).slice(0, 20);
-
-    shuffled.forEach((country) => {
-      const img = document.createElement('img');
-      img.className = 'floating-emoji';
-      img.src = country.image;
-      img.alt = country.code;
-      img.style.top = `${Math.random() * 90}%`;
-      img.style.left = `${Math.random() * 90}%`;
-      container.appendChild(img);
-    });
-  });
-
-  </script>
-
-    <script type="module" src="script.js"></script>
+  
+    <script src="landingpage.js" defer></script>
 </body>
 </html>

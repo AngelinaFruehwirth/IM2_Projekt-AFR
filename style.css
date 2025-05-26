@@ -11,7 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Emojis im Hintergrund */
 .landing-page .emoji-container,
 #emoji-container {
   position: fixed;
@@ -39,7 +38,6 @@ body {
   100% { transform: translate(0, 0) rotate(360deg); }
 }
 
-/* Landing Page Suche */
 .search-box {
   position: absolute;
   top: 50%;
@@ -102,7 +100,6 @@ body {
   transform: scale(1.05);   
 }
 
-/* Ergebnisse */
 .results-page {
   text-align: center;
   min-height: 100vh;
@@ -186,7 +183,6 @@ body {
   text-align: center;
 }
 
-/* Podium Farben */
 .podium-1 .column {
   background: linear-gradient(#fff, #ccc);
 }
