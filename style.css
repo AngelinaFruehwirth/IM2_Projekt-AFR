@@ -98,8 +98,8 @@ body {
 }
 
 #search-form button:hover {
-  background-color: #f0f0f0; /* leicht gräulicher Hintergrund */
-  transform: scale(1.05);   /* leicht vergrößern */
+  background-color: #f0f0f0; 
+  transform: scale(1.05);   
 }
 
 /* Ergebnisse */
